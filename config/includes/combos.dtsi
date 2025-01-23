@@ -1,200 +1,247 @@
-/*                KEY POSITIONS
-
-  ╭─────────────────────╮ ╭─────────────────────╮
-  │ LT4 LT3 LT2 LT1 LT0 │ │ RT0 RT1 RT2 RT3 RT4 │
-  │ LM4 LM3 LM2 LM1 LM0 │ │ RM0 RM1 RM2 RM3 RM4 │
-  │ LB4 LB3 LB2 LB1 LB0 │ │ RB0 RB1 RB2 RB3 RB4 │
-  ╰───────╮ LH2 LH1 LH0 │ │ RH0 RH1 RH2 ╭───────╯
-          ╰─────────────╯ ╰─────────────╯ */
-
-#define MCOPY LC(INS)
-#define MPASTE LS(INS)
+#define COMBO_TERM_FAST 35
+#define COMBO_TERM_SLOW 40
+#define COMBO_PRIOR_IDLE 100
 
 / {
-  // idle timeout for combos is 10500/40 = 260
   combos {
     compatible = "zmk,combos";
 
-    combo_caps_word {
-      timeout-ms = <50>;
-      key-positions = <LM1 RM1>;
-      bindings = <&caps_word>;
-      layers = <BASE>;
-    };
+    // combo_bracket_round_l {
+    //   timeout-ms = <COMBO_TERM_FAST>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <LM2 LM1>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp LPAR>;
+    // };
 
-    combo_dot_spc {
-      timeout-ms = <50>;
-      key-positions = <LH0 RH0>;
-      bindings = <&dot_spc>;
-      layers = <BASE>;
-    };
+    // combo_bracket_round_r {
+    //   timeout-ms = <COMBO_TERM_FAST>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <RM1 RM2>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp RPAR>;
+    // };
 
-    combo_amps {
-      timeout-ms = <50>;
-      key-positions = <RM2 RB2>;
-      bindings = <&kp AMPS>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
+    // combo_bracket_square_l {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <LB2 LB1>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp LBKT>;
+    // };
 
-    combo_hash {
-      timeout-ms = <50>;
-      key-positions = <RM3 RB3>;
-      bindings = <&kp HASH>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
+    // combo_bracket_square_r {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <RB1 RB2>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp RBKT>;
+    // };
 
-    combo_grave {
-      timeout-ms = <50>;
-      key-positions = <LM3 LB3>;
-      bindings = <&kp GRAVE>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
+    // combo_bracket_curly_l {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <LT2 LT1>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp LBRC>;
+    // };
 
-    combo_at {
-      timeout-ms = <50>;
-      key-positions = <LT3 LM3>;
-      bindings = <&kp AT>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
+    // combo_bracket_curly_r {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <RT2 RT1>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp RBRC>;
+    // };
 
-    combo_pipe {
-      timeout-ms = <50>;
-      key-positions = <RT2 RM2>;
-      bindings = <&kp PIPE>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
+    // combo_bracket_angled_l {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <LM3 LM2>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp LT>;
+    // };
 
-    combo_minus {
-      timeout-ms = <50>;
-      key-positions = <RM1 RB1>;
-      bindings = <&kp MINUS>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
+    // combo_bracket_angled_r {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <RM3 RM2>;
+    //   layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+    //   bindings = <&kp GT>;
+    // };
 
-    combo_underscore {
-      timeout-ms = <50>;
-      key-positions = <RM0 RB0>;
-      bindings = <&kp UNDERSCORE>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    combo_plus {
-      timeout-ms = <50>;
-      key-positions = <RT0 RM0>;
-      bindings = <&kp PLUS>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    combo_paste {
-      timeout-ms = <50>;
-      key-positions = <LB1 LB2>;
-      bindings = <&kp MPASTE>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    combo_copy {
-      timeout-ms = <50>;
-      key-positions = <LB2 LB3>;
-      bindings = <&kp MCOPY>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    combo_equal {
-      timeout-ms = <50>;
-      key-positions = <RM0 RM1>;
-      bindings = <&kp EQUAL>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    // [
-    combo_lbkt {
-      timeout-ms = <50>;
-      key-positions = <RT1 RM1>;
-      bindings = <&kp LBKT>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    // ]
-    combo_rbkt {
-      timeout-ms = <50>;
-      key-positions = <RT3 RM3>;
-      bindings = <&kp RBKT>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    // {
-    combo_lbrc {
-      timeout-ms = <50>;
-      key-positions = <RT1 RT2>;
-      bindings = <&kp LBRC>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    // }
-    combo_rbrc {
-      timeout-ms = <50>;
-      key-positions = <RT2 RT3>;
-      bindings = <&kp RBRC>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
-    };
-
-    // (
-    combo_lpar {
-      timeout-ms = <50>;
-      key-positions = <RM1 RM2>;
+    combo_bracket_v_round_l {
+      timeout-ms = <COMBO_TERM_FAST>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LT1 LM1>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
       bindings = <&kp LPAR>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
     };
 
-    // )
-    combo_rpar {
-      timeout-ms = <50>;
-      key-positions = <RM2 RM3>;
+    combo_bracket_v_round_r {
+      timeout-ms = <COMBO_TERM_FAST>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <RT1 RM1>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
       bindings = <&kp RPAR>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
     };
 
-    // <
-    combo_lt {
-      timeout-ms = <50>;
-      key-positions = <RB1 RB2>;
-      bindings = <&kp FSLH>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
+    combo_bracket_v_square_l {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LT2 LM2>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+      bindings = <&kp LBKT>;
     };
 
-    // >
-    combo_gt {
-      timeout-ms = <50>;
-      key-positions = <RB2 RB3>;
-      bindings = <&kp BSLH>;
-      layers = <BASE>;
-      require-prior-idle-ms = <260>;
+    combo_bracket_v_square_r {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <RT2 RM2>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+      bindings = <&kp RBKT>;
     };
 
-    // mouse
-    combo_mouse {
-      timeout-ms = <50>;
-      key-positions = <LT3 LT1>;
-      bindings = <&smart_mouse>;
-      layers = <BASE MOUSE>;
+    combo_bracket_v_curly_l {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LT3 LM3>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+      bindings = <&kp LBRC>;
     };
+
+    combo_bracket_v_curly_r {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <RT3 RM3>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+      bindings = <&kp RBRC>;
+    };
+
+    combo_bracket_v_angled_l {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LM1 LB1>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+      bindings = <&kp LT>;
+    };
+
+    combo_bracket_v_angled_r {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <RM1 RB1>;
+      layers = <BASE BASE_QWERTY SYM NUM NUM_WORD>;
+      bindings = <&kp GT>;
+    };
+
+    combo_capsword {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LM1 RM1>;
+      layers = <BASE BASE_QWERTY>;
+
+#ifdef HAS_CAPSLOCK
+      bindings = <&caps_word_capslock >;
+#else
+      bindings = <&caps_word>;
+#endif
+    };
+
+    combo_return {
+      timeout-ms = <COMBO_TERM_FAST>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LH2 LH1 LH0>;
+      layers = <BASE BASE_QWERTY NAV NUM SYM>;
+      bindings = <&kp RET>;
+    };
+
+    combo_bspc {
+      timeout-ms = <COMBO_TERM_FAST>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LH1 LH0>;
+      layers = <BASE BASE_QWERTY NAV NUM SYM>;
+      bindings = <&kp BSPC>;
+    };
+
+    // combo_grave {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <RM3 RM4>;
+    //   layers = <>;
+    //   bindings = <&kp GRAVE>;
+    // };
+
+    // combo_md_code_block {
+    //   timeout-ms = <COMBO_TERM_SLOW>;
+    //   require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+    //   key-positions = <RM2 RM3 RM4>;
+    //   layers = <>;
+    //   bindings = <&m_type_md_code_block>;
+    // };
+
+    combo_tog_nav_word {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LM3 LM2 LM1>;
+      layers = <BASE BASE_QWERTY NUM NUM_WORD>;
+
+      #ifdef HAS_UROB
+        bindings = <&nav_word>;
+      #else
+        bindings = <&tog NAV_WORD>;
+      #endif
+
+    };
+
+    combo_tog_num_word {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LB3 LB2 LB1>;
+      layers = <BASE BASE_QWERTY NAV NAV_WORD>;
+
+      #ifdef HAS_UROB
+        bindings = <&num_word>;
+      #else
+        bindings = <&tog NUM_WORD>;
+      #endif
+
+    };
+
+#ifdef HAS_MOUSE_TP
+    combo_tog_mouse_settings_l {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      // require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LT2 LT3 LT4>;
+      layers = <BASE BASE_QWERTY NAV NAV_WORD MOUSE_KEYS>;
+      bindings = <&tog MOUSE_TP_SET>;
+    };
+
+    combo_tog_mouse_settings_r {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      // require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <RT2 RT3 RT4>;
+      layers = <BASE BASE_QWERTY NAV NAV_WORD MOUSE_KEYS>;
+      bindings = <&tog MOUSE_TP_SET>;
+    };
+#endif
+
+#ifdef HAS_MOUSE_KEYS
+    combo_tog_mouse_keys_l {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      // require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <LM2 LM3 LM4>;
+      layers = <BASE BASE_QWERTY NAV NAV_WORD MOUSE_KEYS>;
+      bindings = <&tog MOUSE_KEYS>;
+    };
+
+    combo_tog_mouse_keys_r {
+      timeout-ms = <COMBO_TERM_SLOW>;
+      // require-prior-idle-ms = <COMBO_PRIOR_IDLE>;
+      key-positions = <RM2 RM3 RM4>;
+      layers = <BASE BASE_QWERTY NAV NAV_WORD MOUSE_KEYS>;
+      bindings = <&tog MOUSE_KEYS>;
+    };
+#endif
+
   };
 };
