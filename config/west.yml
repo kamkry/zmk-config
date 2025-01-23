@@ -8,8 +8,8 @@ manifest:
 
   projects:
     - name: zmk
-      remote: infused-kim
-      revision: pr-testing/mouse_ps2_module_base
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
 
     - name: zmk-helpers
