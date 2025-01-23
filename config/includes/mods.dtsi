@@ -1,0 +1,100 @@
+#define HM_TAPPING_TERM 280
+#define HM_TAPPING_TERM_FAST 200
+
+/ {
+
+  behaviors {
+
+    // Positional Homerow mods
+    // Homerow mods that prevent accidental activations when rolling keys,
+    // such as when typing `st` or `ne` on colemak-dh layouts or `as` on
+    // qwerty.
+    //
+    // Works by only allowing a mod to activate within tapping-term if
+    // it's on the opposite side of the keyboard or on the same side thumb
+    // keys.
+
+    // Further optimization using urob's timerless homerow mods method:
+    // https://github.com/urob/zmk-config#timeless-homerow-mods
+    hml: homerow_mods_left {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      label = "HOMEROW_MODS_LEFT";
+
+      flavor = "balanced";
+      tapping-term-ms = <280>;
+      quick-tap-ms = <175>;                // repeat on tap-into-hold
+      require-prior-idle-ms = <170>;
+      bindings = <&kp>, <&kp>;
+      hold-trigger-key-positions = <KEYS_R KEYS_T>;
+      hold-trigger-on-release;             // delay positional check until key-release
+    };
+
+    hmr: homerow_mods_right {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      label = "HOMEROW_MODS_RIGHT";
+
+      flavor = "balanced";
+      tapping-term-ms = <280>;
+      quick-tap-ms = <175>;                // repeat on tap-into-hold
+      require-prior-idle-ms = <170>;
+      bindings = <&kp>, <&kp>;
+      hold-trigger-key-positions = <KEYS_L KEYS_T>;
+      hold-trigger-on-release;             // delay positional check until key-release
+    };
+
+
+    /*
+     * Non-Positional Homerow Mods
+     * Used for &mm_grescm_gui behavior on left hand.
+     *
+     * Usage: &hm LSHFT T
+     * Tap: T
+     * Tap-Tap-Hold: Repeat T
+     * Hold: LSHIFT
+     */
+    tm: thumb_mods {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      bindings = <&kp>, <&kp>;
+      label = "THUMB_MODS";
+
+      flavor = "balanced";
+      tapping-term-ms = <200>;
+      quick_tap_ms = <175>;
+      retro-tap; // use tap when key is used without another key
+    };
+
+  // smart_mouse, requires PR #1366
+    smart_mouse: smart_mouse {
+      compatible = "zmk,behavior-tri-state";
+      #binding-cells = <0>;
+      bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
+      label = "SMART_MOUSE";
+
+      ignored-key-positions = <LT1 LT3 RT1 RT2 RT3 RM1 RM2 RM3 RH0 RH1 RH2>;
+      ignored-layers = <MOUSE>;
+    };
+
+  // Swaper
+    swapper: swapper {
+      compatible = "zmk,behavior-tri-state";
+      #binding-cells = <0>;
+      bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+      label = "SWAPPER";
+
+      ignored-key-positions = <LT1>;
+    };
+
+  // Swaper_2
+    swapper_2: swapper_2 {
+      compatible = "zmk,behavior-tri-state";
+      #binding-cells = <0>;
+      bindings = <&kt LALT>, <&kp TILDE>, <&kt LALT>;
+      label = "SWAPPER_2";
+
+      ignored-key-positions = <LT2>;
+    };
+  };
+};
