@@ -1,4 +1,4 @@
-#define WIRELESS 1
+#define CONFIG_WIRELESS
 
 /* define layout */
 //#define ALPHA_23332 1
@@ -6,3 +6,4 @@
 
 /* source the main keymap */
 #include "base.keymap"
+#include "zmk-helpers/key-labels/36.h"
