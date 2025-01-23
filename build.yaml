@@ -13,5 +13,5 @@
 #
 ---
 include:
-  - board: chocofi_left
-  - board: chocofi_right
+  shield: chocofi_left
+  board: [ "nice_nano_v2" ]
