@@ -9,7 +9,6 @@
 #include "zmk-helpers/key-labels/36.h"
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
 
 &lt {
@@ -19,6 +18,8 @@
 };
 
 &sk { quick-release; };
+
+&mt { quick-tap-ms = <175>; };
 
 / {
     behaviors {
@@ -69,13 +70,6 @@
             quick-tap-ms = <175>;
             hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32 33 34 35>;
         };
-
-        capsshift: capsshift {
-            compatible = "zmk,behavior-tap-dance";
-            label = "CAPSSHIFT";
-            #binding-cells = <0>;
-            bindings = <&kp LEFT_SHIFT>, <&caps_word>;
-        };
     };
 };
 
@@ -90,7 +84,7 @@
         };
 
         cmd {
-            bindings = <&kp LCMD>;
+            bindings = <&caps_word>;
             key-positions = <22 23>;
             layers = <0>;
         };
@@ -100,6 +94,11 @@
             key-positions = <16 17>;
             layers = <0>;
         };
+
+        backspace {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <0 1>;
+        };
     };
 
     keymap {
@@ -108,62 +107,53 @@
         base {
             display-name = "base";
             bindings = <
-&kp Q                &kp W         &kp E          &kp R     &kp T          &kp Y        &kp U            &kp I                 &kp O           &kp P
-&kp A                &kp S         &kp D          &kp F     &kp G          &kp H        &kp J            &kp K                 &kp L           &kp SEMI
-&hm_shift_l LSHFT Z  &hm_l LALT X  &hm_l LCTRL C  &kp V     &kp B          &kp N        &kp M            &hm_r RCTRL COMMA     &hm_r RALT DOT  &hm_shift_r RSHFT SLASH
-                                   &lt 5 ESCAPE   &kp LCMD  &lt 1 SPACE    &lt 2 ENTER  &lt 3 BACKSPACE  &hm_shift_r RALT TAB
+&kp Q                &kp W          &kp E         &kp R     &kp T          &kp Y        &kp U            &kp I         &kp O               &kp P
+&kp A                &kp S          &kp D         &kp F     &kp G          &kp H        &kp J            &kp K         &kp L               &kp SINGLE_QUOTE
+&hm_shift_l LSHFT Z  &hm_l LCTRL X  &kp C         &kp V     &kp B          &kp N        &kp M            &kp COMMA     &hm_r RCTRL PERIOD  &hm_shift_r RSHFT SEMI
+                                    &lt 4 ESCAPE  &kp LCMD  &lt 1 SPACE    &lt 3 ENTER  &lt 2 BACKSPACE  &mt RALT TAB
             >;
         };
 
         nav {
             bindings = <
-&trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans        &trans     &trans
-&trans  &trans  &trans  &trans  &trans    &kp LEFT  &kp DOWN  &kp UP_ARROW  &kp RIGHT  &trans
-&trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans        &trans     &trans
-                &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans    &trans                &trans             &trans         &trans         &trans
+&trans  &trans  &trans  &trans  &trans    &kp LEFT              &kp DOWN           &kp UP_ARROW   &kp RIGHT      &trans
+&trans  &trans  &trans  &trans  &trans    &kp LS(LG(NUMBER_4))  &kp LC(LEFT)       &kp LC(RIGHT)  &kp LG(GRAVE)  &trans
+                &trans  &trans  &trans    &trans                &kp LA(BACKSPACE)  &trans
             >;
 
             label = "nav";
         };
 
-        sym {
-            bindings = <
-&kp TILDE  &kp LESS_THAN  &kp GREATER_THAN  &kp BACKSLASH  &kp PIPE         &kp CARET  &kp LEFT_BRACE    &kp RIGHT_BRACE    &kp DOLLAR         &kp DOUBLE_QUOTES
-&kp EXCL   &kp ASTRK      &kp SLASH         &kp EQUAL      &kp AMPERSAND    &kp HASH   &kp LPAR          &kp RPAR           &kp SINGLE_QUOTE   &kp SINGLE_QUOTE
-&kp GRAVE  &kp MINUS      &kp PLUS          &kp UNDER      &kp PERCENT      &kp AT     &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp DOUBLE_QUOTES  &kp QUESTION
-                          &trans            &trans         &trans           &trans     &trans            &trans
-            >;
-
-            label = "sym";
-        };
-
         num {
-            display-name = "num";
             bindings = <
 &trans  &trans  &trans  &trans  &trans    &trans  &kp N7  &kp N8  &kp N9  &trans
 &trans  &trans  &trans  &trans  &trans    &trans  &kp N4  &kp N5  &kp N6  &trans
 &trans  &trans  &trans  &trans  &trans    &kp N0  &kp N1  &kp N2  &kp N3  &trans
                 &trans  &trans  &trans    &trans  &trans  &kp N0
             >;
+
+            label = "num";
         };
 
-        fn {
-            display-name = "fn";
+        sym {
             bindings = <
-&trans  &trans  &trans  &trans  &trans    &trans  &kp F7  &kp F8  &kp F9  &kp F10
-&trans  &trans  &trans  &trans  &trans    &trans  &kp F4  &kp F5  &kp F6  &kp F11
-&trans  &trans  &trans  &trans  &trans    &trans  &kp F1  &kp F2  &kp F3  &kp F12
-                &trans  &trans  &trans    &trans  &trans  &trans
+&kp TILDE  &kp LESS_THAN  &kp GREATER_THAN  &kp BACKSLASH  &kp PIPE         &kp CARET  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp DOLLAR  &trans
+&kp EXCL   &kp ASTRK      &kp SLASH         &kp EQUAL      &kp AMPERSAND    &kp HASH   &kp LPAR          &kp RPAR           &trans      &kp QUESTION
+&kp GRAVE  &kp MINUS      &kp PLUS          &kp UNDER      &kp PERCENT      &kp AT     &kp LBRC          &kp RBRC           &trans      &kp GRAVE
+                          &trans            &trans         &trans           &trans     &sys_reset        &bootloader
             >;
+
+            label = "sym";
         };
 
         media {
             display-name = "media";
             bindings = <
-&sys_reset  &ext_power EP_TOG  &trans  &trans  &bootloader    &bootloader     &trans             &trans           &trans      &sys_reset
-&trans      &trans             &trans  &trans  &trans         &kp C_PREVIOUS  &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &kp C_NEXT  &kp C_PLAY_PAUSE
-&trans      &trans             &trans  &trans  &trans         &trans          &kp SLCK           &kp PAUSE_BREAK  &trans      &trans
-                               &trans  &trans  &bt BT_CLR     &bt BT_SEL 0    &bt BT_SEL 1       &kp LC(LG(Q))
+&sys_reset  &none  &none   &none   &bt BT_CLR    &none         &kp C_PREVIOUS     &kp C_NEXT             &kp C_PP  &sys_reset
+&none       &none  &none   &none   &none         &none         &kp K_VOLUME_DOWN  &kp K_VOLUME_UP        &none     &none
+&none       &none  &none   &none   &none         &none         &kp SLCK           &kp PAUSE_BREAK        &none     &none
+                   &trans  &trans  &trans        &bt BT_SEL 0  &bt BT_SEL 1       &kp LS(LA(LC(LG(S))))
             >;
         };
     };
